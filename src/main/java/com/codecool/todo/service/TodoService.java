@@ -28,4 +28,8 @@ public class TodoService {
     public void toggleAll() {
         todoRepository.toggleAll();
     }
+
+    public void deleteTodo(int id) {
+        todoRepository.deleteById(id);
+    }
 }

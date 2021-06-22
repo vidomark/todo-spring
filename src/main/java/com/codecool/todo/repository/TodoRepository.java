@@ -14,9 +14,9 @@ import javax.transaction.Transactional;
 public interface TodoRepository extends JpaRepository<Todo, Integer> {
 
     @Query("UPDATE Todo todo SET todo.status = " +
-            "CASE WHEN todo.status = 'COMPLETE' THEN 'ACTIVE' " +
-            "ELSE 'COMPLETE' " +
-            "END ")
+                "CASE WHEN todo.status = 'COMPLETE' THEN 'ACTIVE' " +
+                "ELSE 'COMPLETE' " +
+                "END ")
     @Modifying(clearAutomatically = true)
     void toggleAll();
 }

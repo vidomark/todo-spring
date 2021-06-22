@@ -35,14 +35,13 @@ public class IndexController {
         return todoService.getTodos();
     }
 
-    @PostMapping("addTodo")
+    @PostMapping( "addTodo")
     @ResponseBody
-    public String addTodo(HttpServletRequest request) {
-        String title = request.getParameter("todo-title");
+    public String addTodo(@RequestParam("todo-title") String todoTitle) {
         Status status = Status.ACTIVE; // default status is ACTIVE
 
         Todo todo = Todo.builder()
-                .title(title)
+                .title(todoTitle)
                 .status(status)
                 .build();
 
@@ -55,6 +54,13 @@ public class IndexController {
     @ResponseBody
     public String toggleAll() {
         todoService.toggleAll();
+        return SUCCESS;
+    }
+
+    @DeleteMapping("todos/{id}")
+    @ResponseBody
+    public String deleteTodo(@PathVariable int id) {
+        todoService.deleteTodo(id);
         return SUCCESS;
     }
 }
