@@ -24,4 +24,8 @@ public class TodoService {
     public Todo addTodo(Todo todo) {
         return todoRepository.save(todo);
     }
+
+    public void toggleAll() {
+        todoRepository.toggleAll();
+    }
 }

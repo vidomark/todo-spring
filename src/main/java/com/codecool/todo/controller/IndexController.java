@@ -14,8 +14,11 @@ import java.util.List;
 @RequestMapping("/")
 public class IndexController {
 
+
     @Autowired
     private final TodoService todoService;
+
+    private static final String SUCCESS = "{\"success\":true}"; // response
 
     public IndexController(TodoService todoService) {
         this.todoService = todoService;
@@ -34,7 +37,7 @@ public class IndexController {
 
     @PostMapping("addTodo")
     @ResponseBody
-    public Status addTodo(HttpServletRequest request) {
+    public String addTodo(HttpServletRequest request) {
         String title = request.getParameter("todo-title");
         Status status = Status.ACTIVE; // default status is ACTIVE
 
@@ -44,6 +47,14 @@ public class IndexController {
                 .build();
 
         todoService.addTodo(todo);
-        return status;
+
+        return SUCCESS;
+    }
+
+    @PutMapping("todos/toggle_all")
+    @ResponseBody
+    public String toggleAll() {
+        todoService.toggleAll();
+        return SUCCESS;
     }
 }
