@@ -17,8 +17,8 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
 
-    public List<Todo> getTodos() {
-        return todoRepository.findAll();
+    public List<Todo> getTodosByStatus(String status) {
+        return todoRepository.getTodosByStatus(status);
     }
 
     public Todo addTodo(Todo todo) {

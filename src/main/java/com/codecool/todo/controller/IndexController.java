@@ -31,8 +31,8 @@ public class IndexController {
 
     @PostMapping("list")
     @ResponseBody
-    public List<Todo> getTodos() {
-        return todoService.getTodos();
+    public List<Todo> getTodos(@RequestParam("status") String status) {
+        return todoService.getTodosByStatus(status);
     }
 
     @PostMapping( "addTodo")
