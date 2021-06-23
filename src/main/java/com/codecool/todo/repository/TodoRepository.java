@@ -28,4 +28,8 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {
     @Query("UPDATE Todo todo SET todo.status = CASE WHEN todo.status = 'COMPLETE' THEN 'ACTIVE' ELSE 'COMPLETE' END WHERE todo.id = :id")
     @Modifying(clearAutomatically = true)
     void toggleTodo(@Param("id") int id);
+
+    @Query("UPDATE Todo todo SET todo.title = :title WHERE todo.id = :id")
+    @Modifying(clearAutomatically = true)
+    void updateTodo(@Param("id") int id, @Param("title") String title);
 }

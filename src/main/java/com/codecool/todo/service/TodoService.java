@@ -40,4 +40,8 @@ public class TodoService {
     public void toggleTodo(int id) {
         todoRepository.toggleTodo(id);
     }
+
+    public void updateTodo(int id, String title) {
+        todoRepository.updateTodo(id, title);
+    }
 }

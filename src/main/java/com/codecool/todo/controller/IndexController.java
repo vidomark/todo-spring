@@ -48,6 +48,13 @@ public class IndexController {
         return SUCCESS;
     }
 
+    @PutMapping("todos/{id}")
+    @ResponseBody
+    public String updateTodo(@PathVariable int id, @RequestParam("todo-title") String title) {
+        todoService.updateTodo(id, title);
+        return SUCCESS;
+    }
+
     @PutMapping("todos/{id}/toggle_status")
     @ResponseBody
     public String toggleTodo(@PathVariable int id) {
