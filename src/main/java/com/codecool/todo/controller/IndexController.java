@@ -51,7 +51,7 @@ public class IndexController {
     @PutMapping("todos/{id}/toggle_status")
     @ResponseBody
     public String toggleTodo(@PathVariable int id) {
-        System.out.println(id);
+        todoService.toggleTodo(id);
         return SUCCESS;
     }
 
