@@ -39,14 +39,19 @@ public class IndexController {
     @ResponseBody
     public String addTodo(@RequestParam("todo-title") String todoTitle) {
         Status status = Status.ACTIVE; // default status is ACTIVE
-
         Todo todo = Todo.builder()
                 .title(todoTitle)
                 .status(status)
                 .build();
 
         todoService.addTodo(todo);
+        return SUCCESS;
+    }
 
+    @PutMapping("todos/{id}/toggle_status")
+    @ResponseBody
+    public String toggleTodo(@PathVariable int id) {
+        System.out.println(id);
         return SUCCESS;
     }
 
@@ -61,6 +66,13 @@ public class IndexController {
     @ResponseBody
     public String deleteTodo(@PathVariable int id) {
         todoService.deleteTodo(id);
+        return SUCCESS;
+    }
+
+    @DeleteMapping("todos/completed")
+    @ResponseBody
+    public String deletedCompleted() {
+        todoService.deleteCompleted();
         return SUCCESS;
     }
 }

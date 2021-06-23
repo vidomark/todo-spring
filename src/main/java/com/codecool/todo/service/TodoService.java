@@ -32,4 +32,12 @@ public class TodoService {
     public void deleteTodo(int id) {
         todoRepository.deleteById(id);
     }
+
+    public void deleteCompleted() {
+        todoRepository.deleteCompleted();
+    }
+
+    public void toggleTodo(int id) {
+        todoRepository.toggleTodo(id);
+    }
 }

@@ -5,6 +5,7 @@ import com.codecool.todo.model.Todo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -19,4 +20,12 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {
                 "END ")
     @Modifying(clearAutomatically = true)
     void toggleAll();
+
+    @Query("DELETE FROM Todo todo WHERE todo.status = 'COMPLETE' ")
+    @Modifying(clearAutomatically = true)
+    void deleteCompleted();
+
+    @Query("UPDATE Todo todo SET todo.status = 'COMPLETE' WHERE todo.id = :id ")
+    @Modifying(clearAutomatically = true)
+    void toggleTodo(@Param("id") int id);
 }
