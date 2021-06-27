@@ -2,6 +2,7 @@ package com.codecool.todo.security;
 
 import com.codecool.todo.jwt.JwtAuthenticationFilter;
 import com.codecool.todo.jwt.JwtConfig;
+import com.codecool.todo.jwt.JwtTokenVerifier;
 import com.codecool.todo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -40,10 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtConfig, secretKey))
-                    .authorizeRequests()
-                    .antMatchers("/login").permitAll()
-                    .antMatchers("/")
-                    .authenticated();
+                .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtAuthenticationFilter.class)
+                .authorizeRequests()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/user").authenticated();
     }
 
     @Override

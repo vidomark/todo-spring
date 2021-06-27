@@ -30,4 +30,9 @@ public class UserRepositoryMem implements UserRepository {
                 .filter(user -> user.getUsername().equals(username))
                 .findFirst();
     }
+
+    @Override
+    public Set<User> getUsers() {
+        return users;
+    }
 }
