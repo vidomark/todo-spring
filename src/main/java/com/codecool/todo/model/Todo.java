@@ -1,49 +1,27 @@
 package com.codecool.todo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Todo {
 
+    @Id
+    @GeneratedValue
+    private int id;
+
     private String title;
-    private String id;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
-    private static int _idCounter = 0;
 
-    private Todo(String title, String id, Status status) {
-        this.title = title;
-        this.id = id;
-        this.status = status;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public boolean isCompleted() {
-        return this.status == Status.COMPLETE;
-    }
-
-    public static Todo create(String title) {
-        _idCounter++;
-        return new Todo(title, String.valueOf(_idCounter), Status.ACTIVE);
-    }
-
+    public boolean isCompleted() {return this.status.equals(Status.COMPLETE);}
 }
